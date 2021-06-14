@@ -1,0 +1,54 @@
+{
+  "name": "tray-cpu-temp",
+  "version": "0.0.0",
+  "description": "Show CPU temp",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "rm -rf dist/ && electron-builder",
+    "get-binary-deps": "rm -rf ./resources/mac/bin/osx-cpu-temp && rm -rf ./osx-cpu-temp && git clone https://github.com/lavoiesl/osx-cpu-temp && cd osx-cpu-temp && make && mv ./osx-cpu-temp ../resources/mac/bin/"
+  },
+  "author": "Taly Guryn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/talyguryn/tray-cpu-temp"
+  },
+  "dependencies": {
+    "app-root-dir": "^1.0.2",
+    "auto-launch": "^5.0.5",
+    "dotenv-json": "^1.0.0",
+    "electron-is-dev": "^1.2.0",
+    "electron-root-path": "^1.0.16",
+    "electron-updater": "^4.3.5",
+    "open": "^7.2.1",
+    "temp-dir": "^2.0.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "devDependencies": {
+    "electron": "^13.0.1",
+    "electron-builder": "^22.8.1"
+  },
+  "build": {
+    "appId": "tray.cpu.temp.app",
+    "productName": "CPU Temp",
+    "extraFiles": [
+      {
+        "from": "resources/mac/bin",
+        "to": "Resources/bin",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.reference"
+    },
+    "dmg": {
+      "title": "CPU Temp"
+    },
+    "files": [
+      "**/*"
+    ]
+  }
+}
