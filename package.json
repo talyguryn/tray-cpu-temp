@@ -1,7 +1,7 @@
 {
   "name": "tray-cpu-temp",
   "version": "0.0.0",
-  "description": "Show CPU temp",
+  "description": "Show CPU temp for macOS",
   "main": "src/index.js",
   "scripts": {
     "start": "electron .",
