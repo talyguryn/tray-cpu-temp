@@ -12,8 +12,8 @@ const root = process.cwd();
 const { isPackaged } = app;
 
 let binariesPath = IS_PROD && isPackaged
-    ? path.join(path.dirname(app.getAppPath()), '..', 'Resources', 'bin')
-    : path.join(root, './resources', getPlatform(), 'bin');
+    ? path.join(path.dirname(app.getAppPath()), 'bin')
+    : path.join(root, 'resources', getPlatform(), 'bin');
 
 binariesPath = path.resolve(__dirname, binariesPath);
 

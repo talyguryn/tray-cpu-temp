@@ -28,10 +28,10 @@ let tray;
 const createTray = () => {
     tray = new Tray(path.join(__dirname, 'assets', 'tray-icon-Template.png'));
 
-    const pathToBinary = path.join(binariesPath, 'osx-cpu-temp')
+    const pathToBinary = path.join(binariesPath, 'osx-cpu-temp').replaceAll(' ', '\\ ');
 
     setInterval(() => {
-        exec(pathToBinary.replaceAll(' ', '\\ '), (exception, stdout, stderr) => {
+        exec(pathToBinary, (exception, stdout, stderr) => {
             if (exception) {
                 log.error(exception);
             }
@@ -105,7 +105,7 @@ process.on("uncaughtException", (err) => {
     log.error('uncaughtException');
     log.error(err);
 
-    throw err;
+    // throw err;
 });
 
 /**
@@ -115,5 +115,5 @@ process.on("unhandledRejection", (err) => {
     log.error('unhandledRejection');
     log.error(err);
 
-    throw err;
+    // throw err;
 });

@@ -5,8 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron .",
-    "build": "rm -rf dist/ && electron-builder",
-    "get-binary-deps": "rm -rf ./resources/mac/bin/osx-cpu-temp && mkdir -p ./resources/mac/bin && rm -rf ./osx-cpu-temp && git clone https://github.com/lavoiesl/osx-cpu-temp && cd osx-cpu-temp && make && mv ./osx-cpu-temp ../resources/mac/bin/"
+    "build": "rimraf dist/ && yarn electron:icons-gen && electron-builder",
+    "get-binary-deps": "rm -rf ./resources/mac/bin/osx-cpu-temp && mkdir -p ./resources/mac/bin && rm -rf ./osx-cpu-temp && git clone https://github.com/lavoiesl/osx-cpu-temp && cd osx-cpu-temp && make && mv ./osx-cpu-temp ../resources/mac/bin/",
+    "electron:icons-gen": "electron-icon-builder --input=./src/assets/app-icon.png --output=build --flatten  && yarn electron:icons-gen:postrun",
+    "electron:icons-gen:postrun": "cp ./build/icons/icon.icns ./build && cp ./build/icons/1024x1024.png ./build/icon.png && rimraf ./build/icons"
   },
   "author": "Taly Guryn",
   "repository": {
@@ -27,7 +29,9 @@
   },
   "devDependencies": {
     "electron": "^13.0.1",
-    "electron-builder": "^22.8.1"
+    "electron-builder": "^22.8.1",
+    "electron-icon-builder": "^2.0.1",
+    "rimraf": "^3.0.2"
   },
   "build": {
     "appId": "tray.cpu.temp.app",

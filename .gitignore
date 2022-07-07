@@ -1,10 +1,12 @@
 .idea/
-node_modules/
 .DS_Store
+
+node_modules/
 *.log
+
 dist/
-src/env.json
-config.js
+build/
+
 
 osx-cpu-temp
 resources
