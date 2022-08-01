@@ -1,7 +1,7 @@
 /**
  * Require tools
  */
-const { app, Menu, Tray } = require('electron')
+const { app, Menu, Tray, shell } = require('electron')
 const autolaunch = require('./utils/autolaunch');
 const path = require('path');
 const { exec } = require('child_process');
@@ -56,8 +56,20 @@ const createTray = () => {
         })
     }, 1000)
 
+    /**
+     * @todo Need to get this from package.json
+     */
+    const NAME = 'Tray CPU Temp';
+    const VERSION = '0.0.0';
 
     tray.setContextMenu(Menu.buildFromTemplate([
+        {
+          label: `${NAME} v${VERSION}`,
+          click() {
+            shell.openExternal('https://github.com/talyguryn/tray-cpu-temp');
+          }
+        },
+        { type: 'separator' },
         {
             label: 'Open at Login',
             type: 'checkbox',
